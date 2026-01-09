@@ -36,7 +36,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/job-tracker.git
+git clone https://github.com/zeynepgunall/job-tracker.git
 cd job-tracker
 
 # Install dependencies
