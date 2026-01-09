@@ -147,12 +147,13 @@
     </div>
   </div>
 
+  <script src="config.js"></script>
   <script>
-    // API Base URL - Production'da Render backend URL'inizi kullanır
-    const API_BASE_URL = window.location.hostname === 'localhost' 
+    // Config dosyasından ayarları al
+    const API_BASE_URL = (window.CONFIG && window.CONFIG.API_BASE_URL) || (window.location.hostname === 'localhost' 
       ? "http://localhost:3000/api"
-      : "https://job-tracker-spck.onrender.com/api";
-    const TOKEN_KEY = "job_tracker_token";
+      : "https://job-tracker-spck.onrender.com/api");
+    const TOKEN_KEY = (window.CONFIG && window.CONFIG.TOKEN_KEY) || "job_tracker_token";
 
     // Check if already logged in
     const token = localStorage.getItem(TOKEN_KEY);
