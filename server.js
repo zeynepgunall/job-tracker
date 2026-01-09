@@ -835,15 +835,25 @@ app.get('/api/health', (req, res) => {
 // Serve static files (frontend) - Production'da frontend dosyalarını serve et
 // Bu sayede hem API hem frontend aynı URL'den çalışır
 if (process.env.NODE_ENV === 'production') {
-  // Static dosyaları serve et (CSS, JS, images, etc.)
+  // Static dosyaları serve et (CSS, JS, HTML, etc.) ama data klasörünü exclude et
   app.use(express.static(path.join(__dirname), {
-    // API route'larını exclude et
-    setHeaders: (res, path) => {
-      if (path.endsWith('.html')) {
-        res.set('Content-Type', 'text/html');
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.html')) {
+        res.set('Content-Type', 'text/html; charset=utf-8');
       }
-    }
+    },
+    // data klasörünü ve node_modules'i serve etme
+    dotfiles: 'ignore',
+    index: 'index.html'
   }));
+  
+  // data ve node_modules klasörlerini koruma
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/data/') || req.path.startsWith('/node_modules/')) {
+      return res.status(404).send('Not found');
+    }
+    next();
+  });
   
   // SPA routing - Tüm non-API route'ları index.html'e yönlendir
   app.get('*', (req, res, next) => {
@@ -851,7 +861,7 @@ if (process.env.NODE_ENV === 'production') {
     if (req.path.startsWith('/api')) {
       return next();
     }
-    // Static dosya uzantılarını bypass et
+    // Static dosya uzantılarını bypass et (Express static middleware zaten handle ediyor)
     if (req.path.match(/\.(js|css|html|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/)) {
       return next();
     }
