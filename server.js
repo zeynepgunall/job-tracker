@@ -832,9 +832,45 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Job Tracker API is running' });
 });
 
+// Serve static files (frontend) - Production'da frontend dosyalarını serve et
+// Bu sayede hem API hem frontend aynı URL'den çalışır
+if (process.env.NODE_ENV === 'production') {
+  // Static dosyaları serve et (CSS, JS, images, etc.)
+  app.use(express.static(path.join(__dirname), {
+    // API route'larını exclude et
+    setHeaders: (res, path) => {
+      if (path.endsWith('.html')) {
+        res.set('Content-Type', 'text/html');
+      }
+    }
+  }));
+  
+  // SPA routing - Tüm non-API route'ları index.html'e yönlendir
+  app.get('*', (req, res, next) => {
+    // API route'larını bypass et
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    // Static dosya uzantılarını bypass et
+    if (req.path.match(/\.(js|css|html|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/)) {
+      return next();
+    }
+    // Diğer tüm route'ları index.html'e yönlendir (SPA routing)
+    res.sendFile(path.join(__dirname, 'index.html'), (err) => {
+      if (err) {
+        console.error('Error sending index.html:', err);
+        res.status(500).send('Error loading page');
+      }
+    });
+  });
+}
+
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Job Tracker API server running on http://localhost:${PORT}`);
   console.log(`📡 API endpoints available at http://localhost:${PORT}/api/applications`);
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`🌐 Frontend available at http://localhost:${PORT}`);
+  }
 });
 
