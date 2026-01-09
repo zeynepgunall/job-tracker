@@ -1,11 +1,5 @@
-// Config dosyasından ayarları al (config.js yüklenmemişse fallback)
-const STORAGE_KEY = (window.CONFIG && window.CONFIG.STORAGE_KEY) || "job_tracker_items_v1";
-const THEME_KEY = (window.CONFIG && window.CONFIG.THEME_KEY) || "job_tracker_theme";
-const VIEW_KEY = (window.CONFIG && window.CONFIG.VIEW_KEY) || "job_tracker_view";
-const TOKEN_KEY = (window.CONFIG && window.CONFIG.TOKEN_KEY) || "job_tracker_token";
-const API_BASE_URL = (window.CONFIG && window.CONFIG.API_BASE_URL) || (window.location.hostname === 'localhost' 
-  ? "http://localhost:3000/api"
-  : "https://job-tracker-spck.onrender.com/api");
+// Config dosyasından ayarları import et
+import { API_BASE_URL, STORAGE_KEY, THEME_KEY, VIEW_KEY, TOKEN_KEY } from './config.js';
 
 // Check authentication on page load
 const token = localStorage.getItem(TOKEN_KEY);
