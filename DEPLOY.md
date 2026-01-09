@@ -29,6 +29,7 @@ Render, full-stack uygulamalar için mükemmel ve ücretsiz bir seçenektir.
 3. **Ayarları yapın:**
    - **Name:** `job-tracker-backend` (veya istediğiniz isim)
    - **Environment:** `Node`
+   - **Root Directory:** (BOŞ BIRAKIN veya `.` yazın) ⚠️ ÖNEMLİ!
    - **Build Command:** `npm install`
    - **Start Command:** `npm start`
    - **Plan:** Free
@@ -177,6 +178,13 @@ const API_BASE_URL = window.location.hostname === 'localhost'
 ## 🐛 Sorun Giderme
 
 ### Backend çalışmıyor
+
+#### "Root directory 'backend' does not exist" hatası
+- ⚠️ **ÇÖZÜM:** Render dashboard'da "Settings" → "Root Directory" alanını **BOŞ** bırakın veya `.` yazın
+- Proje yapınızda `backend/` klasörü yok, dosyalar root'ta
+- Root Directory'yi boş bırakıp tekrar deploy edin
+
+#### Diğer sorunlar
 - Environment variables kontrol edin
 - Logs'u kontrol edin (Render dashboard'da)
 - Port'un doğru olduğundan emin olun

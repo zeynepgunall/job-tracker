@@ -2,7 +2,10 @@ const STORAGE_KEY = "job_tracker_items_v1";
 const THEME_KEY = "job_tracker_theme";
 const VIEW_KEY = "job_tracker_view";
 const TOKEN_KEY = "job_tracker_token";
-const API_BASE_URL = "http://localhost:3000/api";
+// API Base URL - Production'da Render backend URL'inizi buraya yazın
+const API_BASE_URL = window.location.hostname === 'localhost' 
+  ? "http://localhost:3000/api"
+  : "https://job-tracker-spck.onrender.com/api";
 
 // Check authentication on page load
 const token = localStorage.getItem(TOKEN_KEY);

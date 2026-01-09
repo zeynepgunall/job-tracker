@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 const DATA_FILE = path.join(__dirname, 'data', 'applications.json');
 const USERS_FILE = path.join(__dirname, 'data', 'users.json');
