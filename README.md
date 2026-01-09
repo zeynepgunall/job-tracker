@@ -29,7 +29,6 @@
 
 **🎯 Try it now:** [https://job-tracker-spck.onrender.com](https://job-tracker-spck.onrender.com)
 
-> **Note:** First deployment may take ~30 seconds to wake up the server (Render free tier)
 
 ---
 
