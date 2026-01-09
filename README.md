@@ -158,16 +158,7 @@ npm run dev
 
 ## 🚀 Deployment
 
-Projeyi production'a deploy etmek için [DEPLOY.md](DEPLOY.md) dosyasına bakın.
-
-**Hızlı Deploy (Render):**
-1. [Render.com](https://render.com) hesabı oluştur
-2. Backend için "Web Service" oluştur
-3. Frontend için "Static Site" oluştur
-4. Environment variables ekle (`JWT_SECRET`)
-5. Deploy!
-
-Detaylı talimatlar için [DEPLOY.md](DEPLOY.md) dosyasını okuyun.
+https://job-tracker-nu-bay.vercel.app/
 
 ---
 
