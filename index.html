@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>Job / Internship Tracker</h1>
+        <p class="muted">Başvurularını düzenli takip et.</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="stats" id="stats"></div>
+        <button class="btn theme-toggle" id="themeToggle" title="Toggle theme">
+          <span id="themeIcon">☀️</span>
+        </button>
+        <button class="btn" id="logoutBtn" title="Çıkış Yap" style="padding: 0.5rem 1rem;">
+          Çıkış
+        </button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <form id="jobForm" class="form">
+        <input type="hidden" id="jobId" />
+
+        <div class="grid">
+          <label>
+            <span>Company *</span>
+            <input id="company" required placeholder="Commencis" />
+          </label>
+
+          <label>
+            <span>Position *</span>
+            <input id="position" required placeholder="Backend Intern" />
+          </label>
+
+          <label>
+            <span>Status</span>
+            <select id="status">
+              <option>Applied</option>
+              <option>Interview</option>
+              <option>Offer</option>
+              <option>Rejected</option>
+              <option>Accepted</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Date Applied</span>
+            <input id="dateApplied" type="date" />
+          </label>
+
+          <label>
+            <span>Location</span>
+            <input id="location" placeholder="Ankara / Remote" />
+          </label>
+
+          <label>
+            <span>Link</span>
+            <input id="link" type="url" placeholder="https://..." />
+          </label>
+        </div>
+
+        <label class="full">
+          <span>Notes</span>
+          <textarea id="notes" rows="3" placeholder="Mülakat tarihi, kişi, notlar..."></textarea>
+        </label>
+
+        <div class="grid">
+          <label>
+            <span>Follow-up Date</span>
+            <input id="followUpDate" type="date" placeholder="YYYY-MM-DD" />
+          </label>
+
+          <label>
+            <span>Follow-up Note</span>
+            <input id="followUpNote" type="text" placeholder="Reminder note..." />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="saveBtn">Save</button>
+          <button type="button" class="btn" id="resetBtn">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <div class="search-container">
+          <input id="search" placeholder="🔍 Search company / position..." />
+        </div>
+        <input id="filterLocation" placeholder="📍 Filter by location..." />
+        <div class="date-range">
+          <input id="filterDateFrom" type="date" placeholder="From" title="From Date" />
+          <input id="filterDateTo" type="date" placeholder="To" title="To Date" />
+        </div>
+        <select id="sortBy">
+          <option value="NEWEST">Newest</option>
+          <option value="OLDEST">Oldest</option>
+          <option value="FAVORITES_FIRST">Favorites First</option>
+        </select>
+        <button class="btn secondary" id="filterFavorites" title="Show only favorites">
+          ⭐ Favorites
+        </button>
+        <button class="btn secondary" id="viewToggle" title="Toggle view">
+          <span id="viewIcon">📋</span> <span id="viewText">List</span>
+        </button>
+        <div class="data-actions">
+          <button class="btn secondary" id="exportBtn" title="Verileri JSON olarak indir">
+            📥 Export
+          </button>
+          <button class="btn secondary" id="importBtn" title="JSON dosyasından veri yükle">
+            📤 Import
+          </button>
+          <input type="file" id="importFile" accept=".json" style="display:none;" />
+        </div>
+      </div>
+      
+      <div class="filter-status-section">
+        <div class="filter-label">Status:</div>
+        <div class="status-filters">
+          <label class="status-checkbox">
+            <input type="checkbox" class="status-filter" value="Applied" checked />
+            <span>Applied</span>
+          </label>
+          <label class="status-checkbox">
+            <input type="checkbox" class="status-filter" value="Interview" checked />
+            <span>Interview</span>
+          </label>
+          <label class="status-checkbox">
+            <input type="checkbox" class="status-filter" value="Offer" checked />
+            <span>Offer</span>
+          </label>
+          <label class="status-checkbox">
+            <input type="checkbox" class="status-filter" value="Rejected" checked />
+            <span>Rejected</span>
+          </label>
+          <label class="status-checkbox">
+            <input type="checkbox" class="status-filter" value="Accepted" checked />
+            <span>Accepted</span>
+          </label>
+          <button class="btn-link" id="selectAllStatus">Select All</button>
+          <button class="btn-link" id="clearAllStatus">Clear All</button>
+        </div>
+      </div>
+
+      <div id="list" class="list"></div>
+      <div id="kanban" class="kanban-board" style="display:none;"></div>
+      <p class="muted small" id="emptyState" style="display:none;">Henüz kayıt yok. İlk başvurunu ekle 👆</p>
+    </section>
+
+    <footer class="footer muted small">
+      Backend API: http://localhost:3000/api/applications
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
