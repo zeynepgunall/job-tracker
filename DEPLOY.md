@@ -49,8 +49,10 @@ Backend URL'iniz: `https://job-tracker-backend.onrender.com` (veya belirlediğin
 2. **GitHub repository'nizi bağlayın**
 3. **Ayarları yapın:**
    - **Name:** `job-tracker-frontend`
+   - **Root Directory:** (BOŞ BIRAKIN) ⚠️ ÖNEMLİ!
    - **Build Command:** (boş bırakın)
-   - **Publish Directory:** `/` (root)
+   - **Publish Directory:** `/` (root) veya boş bırakın
+   - **Headers:** (boş bırakın - varsayılan yeterli)
 
 4. **Deploy** butonuna tıklayın
 
