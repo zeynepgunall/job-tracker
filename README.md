@@ -1,147 +1,171 @@
-# Job Tracker Application
+# 📋 Job Tracker
 
-Job/Internship başvuru takip uygulaması - Frontend (HTML/CSS/JS) + Backend (Node.js/Express)
+<div align="center">
 
-## 🚀 Özellikler
+**A modern, full-stack job application tracking system with authentication, Kanban board, and follow-up reminders.**
 
-### Frontend
-- ✅ CRUD işlemleri (Create, Read, Update, Delete)
-- ✅ Gelişmiş filtreleme (arama, lokasyon, tarih aralığı, çoklu durum)
-- ✅ Kanban Board görünümü (Sürükle-bırak)
-- ✅ List görünümü
-- ✅ Favoriler/Bookmark
-- ✅ Export/Import JSON
-- ✅ Dark/Light Mode
-- ✅ Duplicate Detection
-- ✅ İstatistikler
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.18-blue.svg)](https://expressjs.com/)
+[![License](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
 
-### Backend (Node.js + Express)
-- ✅ RESTful API
-- ✅ JSON file-based storage (data/applications.json)
-- ✅ CORS desteği
-- ✅ CRUD endpoints
-- ✅ Error handling
+</div>
 
-## 📁 Proje Yapısı
+---
 
-```
-job-tracker/
-├── server.js              # Express server
-├── package.json           # Node.js dependencies
-├── data/
-│   └── applications.json  # Veri dosyası (otomatik oluşur)
-├── index.html
-├── app.js                 # Frontend (API'ye bağlı)
-├── styles.css
-└── README.md
-```
+## ✨ Features
 
-## 🔧 Kurulum ve Çalıştırma
+- 🔐 **JWT Authentication** - Secure user registration and login
+- 📊 **Dual Views** - List and Kanban board with drag-and-drop
+- 🔔 **Follow-up Reminders** - Smart reminders for overdue, today, and upcoming
+- 🔍 **Advanced Filtering** - Search, location, date range, multi-status filter
+- ⭐ **Favorites** - Bookmark important applications
+- 📤 **Export/Import** - Backup and restore your data
+- 🎨 **Dark/Light Mode** - Beautiful UI with theme toggle
+- 📱 **Responsive Design** - Works on all devices
 
-### 1. Backend'i Başlat
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js (v18+)
+- npm
+
+### Installation
 
 ```bash
-# Dependencies yükle
+# Clone the repository
+git clone https://github.com/yourusername/job-tracker.git
+cd job-tracker
+
+# Install dependencies
 npm install
 
-# Server'ı başlat
+# Start the backend server
 npm start
-
-# Veya development mode (nodemon ile otomatik restart)
-npm run dev
 ```
 
-Backend şu adreste çalışacak: **http://localhost:3000**
+Backend runs on **http://localhost:3000**
 
-### 2. Frontend'i Aç
+### Open Frontend
 
-`index.html` dosyasını tarayıcıda açın veya bir local server kullanın:
+Open `login.html` in your browser or use a local server:
 
 ```bash
-# Python ile
+# Python
 python -m http.server 5500
 
-# Node.js ile (http-server)
+# Node.js
 npx http-server -p 5500
 ```
 
-Frontend: **http://localhost:5500**
+Then open **http://localhost:5500**
+
+---
+
+## 📖 Usage
+
+1. **Register/Login** - Create an account or login
+2. **Add Applications** - Fill the form and save
+3. **Manage** - Edit, delete, or favorite applications
+4. **Filter** - Use search, location, date, and status filters
+5. **Follow-ups** - Set follow-up dates and get reminders
+6. **Export/Import** - Backup your data anytime
+
+---
 
 ## 📡 API Endpoints
 
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `GET /api/auth/me` - Get current user
+
 ### Applications
-- `GET /api/applications` - Tüm başvuruları listele
-- `GET /api/applications/:id` - ID'ye göre başvuru getir
-- `POST /api/applications` - Yeni başvuru oluştur
-- `PUT /api/applications/:id` - Başvuru güncelle
-- `DELETE /api/applications/:id` - Başvuru sil
-- `GET /api/applications/status/:status` - Duruma göre listele
-- `GET /api/applications/favorites` - Favorileri listele
-- `GET /api/health` - Health check
+- `GET /api/applications` - Get all applications
+- `GET /api/applications/:id` - Get application by ID
+- `POST /api/applications` - Create application
+- `PUT /api/applications/:id` - Update application
+- `DELETE /api/applications/:id` - Delete application
+- `GET /api/applications/follow-ups` - Get follow-up reminders
+- `GET /api/applications/export` - Export data
+- `POST /api/applications/import` - Import data
 
-### Örnek Request/Response
+**All endpoints require authentication** (Bearer token in Authorization header)
 
-**POST /api/applications**
-```json
+### Example Request
+
+```http
+POST /api/applications
+Authorization: Bearer <token>
+Content-Type: application/json
+
 {
   "company": "Google",
   "position": "Software Engineer",
   "status": "Applied",
   "dateApplied": "2024-12-19",
   "location": "Remote",
-  "link": "https://careers.google.com",
-  "notes": "Technical interview scheduled",
-  "favorite": true
+  "followUpDate": "2024-12-25"
 }
 ```
 
-**Response:**
-```json
-{
-  "id": "uuid-here",
-  "company": "Google",
-  "position": "Software Engineer",
-  "status": "Applied",
-  "dateApplied": "2024-12-19",
-  "location": "Remote",
-  "link": "https://careers.google.com",
-  "notes": "Technical interview scheduled",
-  "favorite": true,
-  "createdAt": "2024-12-19T10:00:00.000Z",
-  "updatedAt": "2024-12-19T10:00:00.000Z"
-}
+---
+
+## 🏗️ Project Structure
+
+```
+job-tracker/
+├── server.js          # Express backend
+├── package.json       # Dependencies
+├── index.html         # Main app page
+├── login.html         # Login/Register page
+├── app.js             # Frontend logic
+├── styles.css         # Styling
+└── data/              # User data (auto-generated)
 ```
 
-## 🔄 Frontend-Backend Entegrasyonu
+---
 
-Frontend artık API'ye bağlı! `app.js` dosyasında:
-- `loadItems()` → `GET /api/applications`
-- `createApplication()` → `POST /api/applications`
-- `updateApplication()` → `PUT /api/applications/:id`
-- `deleteApplication()` → `DELETE /api/applications/:id`
+## 🛠️ Technologies
 
-API çalışmazsa localStorage'a fallback yapıyor.
+**Frontend:** HTML5, CSS3, Vanilla JavaScript  
+**Backend:** Node.js, Express.js  
+**Auth:** JWT, bcryptjs  
+**Storage:** JSON files (easily migratable to database)
 
-## 🗄️ Veri Depolama
+---
 
-Veriler `data/applications.json` dosyasında saklanıyor. Bu dosya otomatik oluşturulur.
+## 📝 Development
 
-## 📝 Notlar
+```bash
+# Development mode (auto-reload)
+npm run dev
+```
 
-- Backend port: 3000
-- CORS tüm origin'lere açık (development için)
-- Production'da CORS ayarlarını sınırlandırın
-- Veriler JSON dosyasında saklanıyor (production'da database kullanılabilir)
+---
 
-## 🛠️ Geliştirme
+## 🤝 Contributing
 
-### Yeni Özellik Ekleme
-1. Backend'de endpoint ekle (`server.js`)
-2. Frontend'de API fonksiyonu ekle (`app.js`)
-3. UI'da kullan
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### Database'e Geçiş
-JSON dosyası yerine MongoDB, PostgreSQL gibi bir database kullanmak için:
-- `server.js` içindeki `readApplications()` ve `writeApplications()` fonksiyonlarını database çağrılarıyla değiştirin
-- Mongoose (MongoDB) veya Sequelize (PostgreSQL) gibi bir ORM kullanabilirsiniz
+---
 
+## 📄 License
+
+ISC License
+
+---
+
+<div align="center">
+
+**Made with ❤️ for job seekers**
+
+⭐ Star this repo if you find it helpful!
+
+</div>
