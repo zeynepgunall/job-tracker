@@ -25,6 +25,14 @@
 
 ---
 
+## 🌐 Live Demo
+
+**🎯 Try it now:** [https://job-tracker-spck.onrender.com](https://job-tracker-spck.onrender.com)
+
+> **Note:** First deployment may take ~30 seconds to wake up the server (Render free tier)
+
+---
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -158,7 +166,12 @@ npm run dev
 
 ## 🚀 Deployment
 
-https://job-tracker-nu-bay.vercel.app/
+**Live Demo:** [https://job-tracker-spck.onrender.com](https://job-tracker-spck.onrender.com)
+
+Deployment instructions can be found in `DEPLOY.md`
+
+> **Backend:** Deployed on Render (Node.js/Express)  
+> **Frontend:** Served from backend (Static files)
 
 ---
 
