@@ -148,7 +148,10 @@
   </div>
 
   <script>
-    const API_BASE_URL = "http://localhost:3000/api";
+    // API Base URL - Production'da Render backend URL'inizi kullanır
+    const API_BASE_URL = window.location.hostname === 'localhost' 
+      ? "http://localhost:3000/api"
+      : "https://job-tracker-spck.onrender.com/api";
     const TOKEN_KEY = "job_tracker_token";
 
     // Check if already logged in
@@ -254,7 +257,7 @@
         }, 1000);
       } catch (error) {
         console.error('Login error:', error);
-        showError(`Bağlantı hatası: ${error.message}. Backend'in çalıştığından emin olun (http://localhost:3000)`);
+        showError(`Bağlantı hatası: ${error.message}. Backend'in çalıştığından emin olun.`);
       }
     });
 
@@ -321,7 +324,7 @@
         }, 1000);
       } catch (error) {
         console.error('Register error:', error);
-        showError(`Bağlantı hatası: ${error.message}. Backend'in çalıştığından emin olun (http://localhost:3000)`);
+        showError(`Bağlantı hatası: ${error.message}. Backend'in çalıştığından emin olun.`);
       }
     });
   </script>
