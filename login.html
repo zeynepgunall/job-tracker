@@ -147,18 +147,14 @@
     </div>
   </div>
 
-  <script src="config.js"></script>
-  <script>
-    // Config dosyasından ayarları al
-    // API Base URL - config.js'den import edilir, fallback olarak dynamic ayarla
-    let API_BASE_URL;
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      API_BASE_URL = "http://localhost:3000/api";
-    } else {
-      // Production'da backend'den serve edildiği için relative path kullan
-      API_BASE_URL = "/api";
-    }
-    const TOKEN_KEY = (window.CONFIG && window.CONFIG.TOKEN_KEY) || "job_tracker_token";
+  <script type="module">
+    // Config constants
+    const TOKEN_KEY = "job_tracker_token";
+    
+    // API Base URL - Production'da backend'den serve edildiği için relative path kullan
+    const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+      ? "http://localhost:3000/api"
+      : "/api";
 
     // Check if already logged in
     const token = localStorage.getItem(TOKEN_KEY);
