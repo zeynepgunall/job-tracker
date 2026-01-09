@@ -51,8 +51,13 @@ Backend URL'iniz: `https://job-tracker-backend.onrender.com` (veya belirlediğin
    - **Name:** `job-tracker-frontend`
    - **Root Directory:** (BOŞ BIRAKIN) ⚠️ ÖNEMLİ!
    - **Build Command:** (boş bırakın)
-   - **Publish Directory:** `/` (root) veya boş bırakın
+   - **Publish Directory:** (BOŞ BIRAKIN - Render otomatik bulur) ⚠️ ÖNEMLİ!
    - **Headers:** (boş bırakın - varsayılan yeterli)
+   
+   ⚠️ **ÖNEMLİ:** Eğer "Cannot GET /" hatası alıyorsanız:
+   - Publish Directory'yi **TAMAMEN BOŞ** bırakın
+   - Root Directory'yi **TAMAMEN BOŞ** bırakın
+   - Render otomatik olarak index.html'i bulmalı
 
 4. **Deploy** butonuna tıklayın
 

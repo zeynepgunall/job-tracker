@@ -20,5 +20,5 @@ services:
     name: job-tracker-frontend
     env: static
     buildCommand: ""
-    staticPublishPath: .
+    # Publish Directory boş bırakılmalı - Render otomatik index.html'i bulur
 
