@@ -162,10 +162,3 @@ ISC License
 
 ---
 
-<div align="center">
-
-**Made with ❤️ for job seekers**
-
-⭐ Star this repo if you find it helpful!
-
-</div>
