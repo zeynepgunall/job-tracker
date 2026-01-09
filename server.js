@@ -9,7 +9,6 @@ const bcrypt = require('bcryptjs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
-const DATA_FILE = path.join(__dirname, 'data', 'applications.json');
 const USERS_FILE = path.join(__dirname, 'data', 'users.json');
 
 // Middleware
@@ -37,7 +36,7 @@ function authenticateToken(req, res, next) {
 
 // Ensure data directory exists
 async function ensureDataDirectory() {
-  const dataDir = path.dirname(DATA_FILE);
+  const dataDir = path.join(__dirname, 'data');
   try {
     await fs.access(dataDir);
   } catch {
@@ -84,25 +83,6 @@ async function writeUserApplications(userId, applications) {
   await fs.writeFile(userDataFile, JSON.stringify(applications, null, 2), 'utf8');
 }
 
-// Read applications from file (legacy, kept for compatibility)
-async function readApplications() {
-  try {
-    await ensureDataDirectory();
-    const data = await fs.readFile(DATA_FILE, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      return [];
-    }
-    throw error;
-  }
-}
-
-// Write applications to file (legacy, kept for compatibility)
-async function writeApplications(applications) {
-  await ensureDataDirectory();
-  await fs.writeFile(DATA_FILE, JSON.stringify(applications, null, 2), 'utf8');
-}
 
 // Helper function to generate UUID
 function generateId() {
@@ -590,7 +570,7 @@ app.get('/api/applications/follow-ups', authenticateToken, async (req, res) => {
 // GET export applications
 app.get('/api/applications/export', authenticateToken, async (req, res) => {
   try {
-    const applications = await readApplications();
+    const applications = await getUserApplications(req.user.userId);
     
     const exportData = {
       version: "1.0",
